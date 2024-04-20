@@ -116,3 +116,18 @@ greek_upper = {k.capitalize(): v.capitalize() for k, v in greek_lower.items()}
 
 greek = {**greek_lower, **greek_upper}
 greek = bijection(greek)
+
+# -------------------------------------------------------------------------
+
+LATEX_FONT_SIZE = [
+    '\\tiny',
+    '\\scriptsize',
+    '\\footnotesize',
+    '\\small',
+    '\\normalsize',
+    '\\large',
+    '\\Large',
+    '\\LARGE',
+    '\\huge',
+    '\\Huge'
+]
