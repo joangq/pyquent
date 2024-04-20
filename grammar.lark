@@ -14,15 +14,17 @@ formula: atom
         | formula IMPLICATION formula -> implication
         | formula IFF formula -> iff
 
-atom: ATOM
-ATOM: /[PQRS][0-9]*/
-NEGATION: /not|¬/
-CONJUNCTION: /and|∧/
-DISJUNCTION: /or|∨/
+atom: GREEK | NAME | CAPITALIZED_NAME
+CAPITALIZED_NAME: /[A-Z][a-z]+/
+GREEK: /[αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ]+/
+NEGATION: /~|¬/
+CONJUNCTION: /&|∧/
+DISJUNCTION: /\||∨/
 IMPLICATION: /=>|⇒/
 IFF: /<=>|⇔/
 
 TURNSTILE: /⊢|\|-/
 
+%import common.CNAME -> NAME
 %import common.WS
 %ignore WS

@@ -16,6 +16,29 @@ class Pyquent:
     
     def transform(self, tree):
         return SequentTransformer().set_unicode(self.unicode).transform(tree)
+    
+    def __call__(self, 
+                 text, 
+                 output=None, 
+                 show_repr=False, 
+                 unicode=False, 
+                 pretty=False, 
+                 latex=False) -> list:
+        
+        tree = self.parse(text)
+        output = self.transform(tree)
+        
+        result = list()
+        if show_repr:
+            result.append(repr(output))
+        
+        if pretty:
+            result.append(str(output))
+
+        if latex:
+            result.append(output.to_latex())
+        
+        return result
 
 class Parser(argparse.ArgumentParser):
     def __init__(self):
@@ -27,6 +50,7 @@ class Parser(argparse.ArgumentParser):
         self.add_argument('-r', '--show-repr', action='store_true')
         self.add_argument('-p', '--pretty', action='store_true')
         self.add_argument('-u', '--unicode', action='store_true')
+        self.add_argument('-x', '--latex', action='store_true')
     
     def parse_args(self):
         self.args = super(Parser, self).parse_args().__dict__
@@ -47,15 +71,9 @@ if __name__ == '__main__':
     show_repr = args.get('show_repr', False)
     pretty = args.get('pretty', False)
     unicode = args.get('unicode', False)
+    latex = args.get('latex', False)
 
     if default_input is not None:
         pyquent = Pyquent(unicode)
-        tree = pyquent.parse(default_input)
-        output = pyquent.transform(tree)
-        
-        if show_repr:
-            print(repr(output))
-            if pretty:
-                print(output)
-        else:
-            print(output)
+        for x in pyquent(default_input, output, show_repr, unicode, pretty, latex):
+            print(x)
