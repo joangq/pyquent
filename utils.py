@@ -1,3 +1,13 @@
+class DefaultInitMeta(type):
+    def __new__(cls, name, bases, attrs):
+        if '__init__' not in attrs:
+            def __init__(self, *args, **kwargs):
+                super(self.__class__, self).__init__(*args, **kwargs)
+            attrs['__init__'] = __init__
+        return super().__new__(cls, name, bases, attrs)
+
+# -------------------------------------------------------------------------
+
 class bijection:
     def __init__(self, d: None|dict = None):
         if d:
