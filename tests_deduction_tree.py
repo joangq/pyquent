@@ -45,4 +45,5 @@ class TestConverter(unittest.TestCase):
 if __name__ == '__main__':
     loader = unittest.TestLoader()
     runner = unittest.TextTestRunner(verbosity=3)
-    runner.run(loader.loadTestsFromTestCase(TestConverter))
+    result = runner.run(loader.loadTestsFromTestCase(TestConverter))
+    exit(0 if result.wasSuccessful() else 1)
