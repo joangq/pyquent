@@ -27,12 +27,12 @@ def latexify(key, value, parser: callable, rule='') -> str:
                 if 'rule' in d: rule = d['rule']
                 inner_latex = r'\;\;'.join(latexify(k, v, parser) for k, v in d.items())
                 key = parser(key)
-                return fr'\frac{{{inner_latex}}}{{{key}}}'+rule
+                return fr'\displaystyle\frac{{{inner_latex}}}{{{key}}}'+rule
             
             case Terminal(value, rule):
                 value = parser(value)
                 key = parser(key)
-                return fr'\frac{{{value}}}{{{key}}}'+rule
+                return fr'\displaystyle\frac{{{value}}}{{{key}}}'+rule
             
             case Inference(value, rule):
                 value = parser(value)
@@ -42,7 +42,7 @@ def latexify(key, value, parser: callable, rule='') -> str:
             case _:
                 value = parser(value)
                 key = parser(key)
-                return fr'\frac{{{value}}}{{{key}}}'+rule
+                return fr'\displaystyle\frac{{{value}}}{{{key}}}'+rule
 
 def dict_to_latex(d, parser: Optional[callable]=None) -> str:
     if not d:
