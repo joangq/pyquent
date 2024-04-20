@@ -1,0 +1,28 @@
+?start: sequent
+
+?sequent: antecedent TURNSTILE succedent
+        | TURNSTILE succedent
+?antecedent: formulas
+?succedent: formulas
+
+formulas: formula ("," formula)*
+formula: atom
+        | "(" formula ")"
+        | NEGATION formula -> negation
+        | formula CONJUNCTION formula -> conjunction
+        | formula DISJUNCTION formula -> disjunction
+        | formula IMPLICATION formula -> implication
+        | formula IFF formula -> iff
+
+atom: ATOM
+ATOM: /[PQRS][0-9]*/
+NEGATION: /not|¬/
+CONJUNCTION: /and|∧/
+DISJUNCTION: /or|∨/
+IMPLICATION: /=>|⇒/
+IFF: /<=>|⇔/
+
+TURNSTILE: /⊢|\|-/
+
+%import common.WS
+%ignore WS
