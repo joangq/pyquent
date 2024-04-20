@@ -1,7 +1,12 @@
 <div>
     <p align="center">
         $$
-        \text{\Huge p$\gamma$quent}
+        \LARGE \dashv\mkern-2mu\text{\Huge p$\gamma$quent} 
+        $$
+    </p>
+    <p align="center">
+        $$
+        \text{a Python parser for Sequent Calculus}
         $$
     </p>
 </div>
