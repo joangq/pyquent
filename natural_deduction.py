@@ -44,7 +44,7 @@ def latexify(key, value, parser: callable, rule='') -> str:
                 key = parser(key)
                 return fr'\frac{{{value}}}{{{key}}}'+rule
 
-def dict_to_latex(d, parser: Optional[callable]) -> str:
+def dict_to_latex(d, parser: Optional[callable]=None) -> str:
     if not d:
         return ''
     
