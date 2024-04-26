@@ -20,9 +20,14 @@ $$
 
 ![](./assets/terminal.png)
 
+
 ---
 
 # ✨ Extra: Natural Deduction System helper
+
+https://github.com/joangq/pyquent/assets/86327859/fa301231-bfc2-4d4c-a313-cbf283526bf5
+
+
 
 Usage:
 ```python
