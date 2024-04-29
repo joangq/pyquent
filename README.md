@@ -35,32 +35,26 @@ https://github.com/joangq/pyquent/assets/86327859/fa301231-bfc2-4d4c-a313-cbf283
 
 Usage:
 ```python
-from natural_deduction import dict_to_latex, Terminal, Inference
+from lark import Lark
 from pyquent import Pyquent
+from pyquent.transformer import *
+from typing import Optional
 from IPython.display import display, Math
-from utils import greek
+from pyquent.natural_deduction import dict_to_latex
+from pyquent.utils import LATEX_FONT_SIZE
 
 pyquent = Pyquent()
 
-# Helper function to easily convert text to LaTeX
-def parse_to_latex(s):
-    if not s:
-        return s
+parse_to_latex = lambda s: '' if not s else pyquent.transform(s).to_latex()
 
-    parse_tree = pyquent.parse(s)
-    output = pyquent.transform(parse_tree)
-    return output.to_latex()
-
-# Helper function for visualizing in Jupyter Notebooks
-def math(s):
-    if isinstance(s, dict | Terminal | Inference):
-        s = dict_to_latex(s, parser=parse_to_latex)
-    display(Math(s))
+def display_math(s, size=7):
+    # Size between 1 and 10
+    display(Math(LATEX_FONT_SIZE[size-1]+'{'+s+'}'))
 
 # ...
 
-d = {'Γ ⊢ τ': 'Γ ⊢ τ ∧ sigma', 'rule': r'\land_{\text{e}_1}'}
-math(d)
+d = {'Γ ⊢ τ': 'Γ |- τ and sigma', 'rule': r'\land_{\text{e}_1}'}
+display_math(dict_to_latex(d, parser=parse_to_latex))
 ```
 
 Output:
