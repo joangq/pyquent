@@ -1,7 +1,7 @@
-from natural_deduction import dict_to_latex, Terminal, Inference
+from pyquent.natural_deduction import dict_to_latex
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
-from utils import LATEX_FONT_SIZE
+from pyquent.utils import LATEX_FONT_SIZE
 from pyquent import Pyquent
 import argparse
 import json
@@ -17,7 +17,7 @@ def parse_to_latex(s):
     return output.to_latex()
 
 def math(s, size=10):
-    if isinstance(s, dict | Terminal | Inference):
+    if isinstance(s, dict):
         s = dict_to_latex(s, parser=parse_to_latex)
     return LATEX_FONT_SIZE[size-1]+s
 

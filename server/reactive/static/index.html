@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyquent reactive</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            startup: {
+                pageReady: function () {
+                    return MathJax.startup.defaultPageReady().then(function () {
+                        document.getElementById('toggleTheme').addEventListener('click', function () {
+                            MathJax.typesetPromise();
+                        });
+                    });
+                }
+            },
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            chtml: {
+                scale: 0.9,
+                fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+    <script src="static/script.js" defer></script>
+</head>
+<body>
+    <div id="container">
+        <h1>pyquent</h1>
+
+        <textarea id="inputText" placeholder="Type here..."></textarea>
+        <div>
+        <input type="file" id="fileInput" style="margin-top: 10px;">
+        <button id="uploadButton">Upload and Process</button>
+        </div>
+        <p><span id="response"></span></p>
+        <p id="errorText"></p>
+        <button id="downloadPng">Download as PNG</button>
+        <button id="downloadTex">Download .tex</button>
+        <button id="copyTex">Copy to Clipboard</button>
+        <button id="showErrors">Show Errors</button>
+        <button id="toggleTheme">Light Mode</button>
+    </div>
+</body>
+</html>

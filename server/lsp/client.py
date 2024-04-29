@@ -17,6 +17,23 @@ def send_request(ip, port, content):
     
     connection.close()
 
+def get_content(x):
+    if not x.startswith('{'):
+        try:
+            with open(x, 'r') as f:
+                content = json.load(f)
+        except FileNotFoundError:
+            print('File not found.')
+            raise
+        except json.JSONDecodeError:
+            print('Invalid JSON file.')
+            raise
+    else:
+        content = json.loads(x)
+    
+    return content
+
+
 if __name__ == '__main__':
     args = sys.argv
 
@@ -34,5 +51,12 @@ if __name__ == '__main__':
     
     ip = 'localhost'
     port = 8000
-    content = json.loads(args[1])
+
+    arg = args[1]
+
+    try:
+        content = get_content(arg)
+    except Exception as e:
+        sys.exit(1)
+
     send_request(ip, port, content)

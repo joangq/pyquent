@@ -1,0 +1,64 @@
+?start: sequent
+
+?sequent: expr | expr TURNSTILE expr | TURNSTILE expr
+
+?expr: term
+    // Propositional logic
+    | expr AND term  -> land
+    | expr OR term   -> lor
+    | expr IMPLIES term -> implies
+    | expr IFF term  -> iff
+    // Lambda calculus
+    | LAMBDA VAR "." expr -> abstraction
+    | expr expr -> application
+    | "if" expr "then" expr "else" expr -> ifthenelse
+    | expr "{" expr ":=" expr "}" -> substitution
+    // Typed lambda calculus
+    | LAMBDA typed_var "." expr -> typed_abstraction
+    // System F
+    | typed_var
+    | expr ":" type -> typed_expr
+    // Let-polymorphism
+    | "let" VAR "=" expr "in" expr -> let
+    // Natural numbers
+    | "zero" -> zero
+    | "succ" "(" expr ")" -> succ
+    | "pred" "(" expr ")" -> pred
+    | "isZero" "(" expr ")" -> iszero
+    | expr PROD expr -> prod
+    // Y-Combinator
+    | MU VAR "." expr -> mu
+
+?type: VAR
+    | type "->" type -> type_arrow
+    // System F
+    | "forall" VAR "." type -> forall
+    // Let-polymorphism
+    | "[" VAR "]" -> type_scheme
+    | "[" VAR "->" VAR "]" -> type_scheme_arrow
+
+?type_scheme: "[" VAR "]"
+    | "forall" VAR "." type_scheme -> forall_scheme
+
+?typed_var: VAR ":" type
+
+?term: atom
+    | NOT term       -> neg
+
+?atom: VAR
+    | "(" expr ")" -> parens
+
+PROD: "*" | "×"
+MU: "µ" | "mu"
+LAMBDA: "λ" | "\\" | "lambda"
+TURNSTILE: "⊢" | "|-"
+AND: "and" | "&"
+OR: "or" | "|"
+IMPLIES: "implies" | "=>"
+IFF: "iff" | "<=>"
+NOT: "not" | "~"
+
+VAR: /(?![a-zA-Zα-ωΑ-Ω]*\b(and|or|implies|iff|not|if|then|else|lambda|forall|zero|let|in|mu|µ)\b)(?!λ+µ*)[a-zA-Zα-ωΑ-Ω0-9_]+/
+
+%import common.WS
+%ignore WS

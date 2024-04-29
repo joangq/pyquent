@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap');
+
+.playfair-display-a {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 0;
+    font-style: normal;
+  }
+  
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Archivo', sans-serif; /* Default font */
+    background-color: #121212; /* Dark theme background */
+    color: #E0E0E0; /* Light text for dark theme */
+}
+#container {
+    text-align: center;
+    margin-top: 20px;
+}
+textarea, button {
+    color: #E0E0E0;
+    background-color: #333;
+    border: 1px solid #666;
+}
+
+textarea {
+    width: 750px;
+    height: 350px;
+}
+
+#inputText, #errorText {
+    width: 80%;
+    min-height: 50px;
+    resize: both;
+    overflow: auto;
+    padding: 8px;
+    box-sizing: border-box;
+}
+#errorText {
+    display: none;
+    color: red;
+    margin-top: 10px;
+}
+.light-mode {
+    background-color: #FFF; /* Light theme background */
+    color: #333; /* Dark text for light theme */
+}
+.light-mode textarea, .light-mode button {
+    color: #333;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+}
+h1 {
+    font-family: "Playfair Display", sans-serif; /* Specific font for title */
+}
