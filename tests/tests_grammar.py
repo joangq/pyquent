@@ -52,32 +52,32 @@ class TestGrammar(unittest.TestCase):
     def test_cases(self):
         tests = [
             (r"Gamma |- M : tau{X:=sigma}", 
-            Sequent(left=Substitution(TypedVar(Var('M'), Var('tau')), Var('X'), Var('sigma')), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=Substitution(TypedVar(Var('M'), Var('tau')), Var('X'), Var('sigma')))),
 
             (r"Gamma |- let x = N in M:sigma", 
-            Sequent(left=Let(Var('x'), Var('N'), TypedVar(Var('M'), Var('sigma'))), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=Let(Var('x'), Var('N'), TypedVar(Var('M'), Var('sigma'))))),
 
             (r"Gamma |- M: forall X . b", 
-            Sequent(left=TypedVar(Var('M'), Forall(Var('X'), Var('b'))), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=TypedVar(Var('M'), Forall(Var('X'), Var('b'))))),
 
             (r"Gamma |- M N : [ sigma ]", 
-            Sequent(left=Application(Var('M'), TypedVar(Var('N'), TypeScheme(Var('sigma')))), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=Application(Var('M'), TypedVar(Var('N'), TypeScheme(Var('sigma')))))),
 
             (r"Gamma |- M N : forall X . [sigma -> sigma]", 
-            Sequent(left=Application(Var('M'), TypedVar(Var('N'), Forall(Var('X'), TypeSchemeArrow(Var('sigma'), Var('sigma'))))), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=Application(Var('M'), TypedVar(Var('N'), Forall(Var('X'), TypeSchemeArrow(Var('sigma'), Var('sigma'))))))),
 
             (r"Gamma |- (if A then B else C) : tau", 
-            Sequent(left=TypedExpr(Parens(IfThenElse(Var('A'), Var('B'), Var('C'))), Var('tau')), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=TypedExpr(Parens(IfThenElse(Var('A'), Var('B'), Var('C'))), Var('tau')))),
 
             (r"Gamma |- (λx . M) : sigma -> tau", 
-            Sequent(left=TypedExpr(Parens(Abstraction(Var('x'), Var('M'))), TypeArrow(Var('sigma'), Var('tau'))), 
-                    right=Var('Gamma'))),
+            Sequent(left=Var('Gamma'), 
+                    right=TypedExpr(Parens(Abstraction(Var('x'), Var('M'))), TypeArrow(Var('sigma'), Var('tau'))))),
 
             (r"isZero(zero)", 
             IsZero(Zero())),
