@@ -20,6 +20,10 @@ $$
 
 ![](./assets/terminal.png)
 
+Real time webapp:
+
+https://github.com/joangq/pyquent/assets/86327859/a9d755d8-cd2c-405d-996e-f529fe1fda8f
+
 
 ---
 
